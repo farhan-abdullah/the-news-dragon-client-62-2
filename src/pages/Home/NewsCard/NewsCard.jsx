@@ -29,7 +29,7 @@ const NewsCard = ({ news }) => {
 						<> details</>
 					) : (
 						<>
-							{details.slice(250)}...<Link to={`/news/:${_id} `}>Read more</Link>
+							{details.slice(0, 250)}...<Link to={`/news/${_id}`}>Read more</Link>
 						</>
 					)}
 				</Card.Text>

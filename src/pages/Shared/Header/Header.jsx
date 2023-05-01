@@ -1,12 +1,15 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from '../../../assets/logo.png';
 import moment from 'moment';
 import { Button, Container } from 'react-bootstrap';
 import Marquee from 'react-fast-marquee';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Provider/AuthProvider';
 const Header = () => {
+	const { user } = useContext(AuthContext);
 	return (
 		<Container>
 			<div className='text-center'>
@@ -23,20 +26,32 @@ const Header = () => {
 					I can be a React component, multiple React components, or just some text.
 				</Marquee>
 			</div>
-     
+
 			<Navbar collapseOnSelect expand='lg' bg='light' variant='light'>
 				<Container>
 					<Navbar.Toggle aria-controls='responsive-navbar-nav' />
 					<Navbar.Collapse id='responsive-navbar-nav'>
 						<Nav className='mx-auto'>
-							<Nav.Link href='#features'>Home</Nav.Link>
-							<Nav.Link href='#pricing'>About</Nav.Link>
-							<Nav.Link href='#pricing'>Career</Nav.Link>
+							<Nav.Link href='#features'>
+								<Link to={'/'}>Home</Link>
+							</Nav.Link>
+							<Nav.Link href='#pricing'>
+								<Link to={'/'}>About</Link>
+							</Nav.Link>
+							<Nav.Link href='#pricing'>
+								<Link to={'/'}>Carer</Link>
+							</Nav.Link>
 						</Nav>
 						<Nav>
 							<Nav.Link href='#deets'>Profile</Nav.Link>
 							<Nav.Link eventKey={2} href='#memes'>
-								<Button variant='secondary'>Login</Button>
+								{user ? (
+									<Button variant='secondary'>Logout</Button>
+								) : (
+									<Link to='/login'>
+										<Button variant='secondary'>Login</Button>
+									</Link>
+								)}
 							</Nav.Link>
 						</Nav>
 					</Navbar.Collapse>
